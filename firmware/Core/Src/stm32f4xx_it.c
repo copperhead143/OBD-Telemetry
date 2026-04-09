@@ -221,3 +221,12 @@ void OTG_FS_IRQHandler(void)
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
+
+
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan) {
+    CAN_RxHeaderTypeDef header;
+    uint8_t data[8];
+    HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &header, data);
+ 
+    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5); //led pin5
+}

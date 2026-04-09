@@ -105,6 +105,22 @@ int main(void)
   MX_CAN2_Init();
   /* USER CODE BEGIN 2 */
 
+  Can_FilterTypeDef f = {0};
+
+  f.FilterActivation      = CAN_FILTER_ENABLE;
+  f.FilterBank            = 0;
+  f.FilterFIFOAssigment   = CAN_RX_FIFO0;
+  f.FilterMode            = CAN_FILTERMODE_IDMASK;
+  f.FilterScale           = CAN_FILTERSCALE_32BIT;
+  f.FilterIdHigh          = 0x0000;
+  f.FilterMaskIdHigh      = 0x0000;
+  f.FilterIdLow           = 0x0000;
+  f.FilterMaskIdLow       = 0x0000;
+
+  HAL_CAN_ConfigFilter(&hcan1, &f);
+
+  HAL_CAN_Start(&hcan1);
+  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
   /* USER CODE END 2 */
 
   /* Init scheduler */
