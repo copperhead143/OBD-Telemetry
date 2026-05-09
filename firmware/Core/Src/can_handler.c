@@ -33,3 +33,19 @@ void can_filter_init_all(CAN_HandleTypeDef *hcan1, CAN_HandleTypeDef *hcan2){
     HAL_CAN_ActivateNotification(hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
     HAL_CAN_ActivateNotification(hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
 }
+
+//todo: callback z przerwan RX
+
+
+// -=-=-=-=- dekodowanie ramek -=-=-=-=-
+
+//znane ramki
+
+#define CAN_ID_RPM          0x090 //obroty
+#define CAN_ID_WHEEL_SPEED  0x190 //predkosci kol
+#define CAN_ID_THROTTLE     0x080 //tps
+#define CAN_ID_DRIVEMODE    0x420 //tryb jazdy  
+
+
+//todo
+#define CAN_ID_TV           0x000 //torque vectoring
