@@ -42,9 +42,9 @@ typedef enum {
 //PONIŻEJ DO ZDEFINIOWANIA W can_handler.c
 
 //freeRTOS kolejki
-//extern osMessageQueueId_t q_raw_frames;
-//extern osMessageQueueId_t q_telemetry;
-//extern osMessageQueueId_t q_tx_cmd;
+extern osMessageQueueId_t q_raw_frames;
+extern osMessageQueueId_t q_telemetry;
+extern osMessageQueueId_t q_tx_cmd;
 
 
 void can_filter_init_all(CAN_HandleTypeDef *hcan1, CAN_HandleTypeDef *hcan2);
