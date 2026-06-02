@@ -44,29 +44,10 @@
   1. Uzupełnić rzeczywiste ID nadawcze (`StdId`) i payloady (z sniffingu oryginalnych ramek).
   2. Odkomentować/zweryfikować `can_send_drive_mode()` i ewentualnie dodać rate-limiting.
 
-## Jak rozszerzyć / co zrobić dalej
-1. Uruchomić sniffing CAN (np. podłączyć podczas pracy pojazdu) i zebrać ramki — wypisać interesujące ID (np. tryb jazdy, torque vectoring, itp.).
-2. Zaktualizować definicje `CAN_ID_*` w `can_handler.c` zgodnie ze sniffingiem.
-3. Uzupełnić tablicę `drive_mode_data[]` i prawidłowe `StdId` w `can_send_drive_mode()` aby móc wysyłać polecenia.
-4. Dodać logowanie/diagnostykę raw ramek (np. wysyłka surowych ramek przez USB) przy debugowaniu.
-5. Dostosować prędkość wysyłki USB (aktualnie 20 ms) zależnie od wymagań pasma/hosta.
 
 ## Budowa i wgrywanie
 - Projekt Keil: otwórz `firmware/EWARM/obd-telemetry.ewp` (lub WorkSpace `Project.eww`) w Keil MDK-ARM i skompiluj.
 - Alternatywnie otwórz `firmware/obd-telemetry.ioc` w STM32CubeIDE (CubeMX) aby wygenerować projekt dla STM32CubeIDE i skompilować/wgrać przez ST-Link.
 - Do wgrywania użyj ST-Linka (np. z poziomu Keil/STM32CubeIDE) lub innego programatora kompatybilnego z STM32F4.
 
-## Testy manualne / przykłady
-- Otwórz terminal szeregowy do portu CDC (115200, 8N1) i obserwuj przychodzące JSONy.
-- Wysyłanie komend: wysyłaj ASCII `CMD:SPORT\r\n` aby przetestować parsowanie komend (powinno trafić do `usb_parse_cmd()` i dalej do kolejki `q_tx_cmd`).
-
-## Bieżące TODO (kod)
-- Uzupełnić brakujące CAN ID i payloady (drive mode, torque vectoring).
-- Dodać możliwość logowania surowych ramek do pliku/hosta dla szybszego mapowania.
-
 ---
-
-Jeśli chcesz, mogę:
-- automatycznie wygenerować szczegółową listę znalezionych funkcji i ich sygnatur,
-- utworzyć przykład skryptu hosta (Python) który odbiera JSON przez USB CDC i wizualizuje wartości,
-- albo zaaplikować zmiany do kodu (np. odkomentować `can_send_drive_mode()` po wskazaniu prawidłowych ID).
