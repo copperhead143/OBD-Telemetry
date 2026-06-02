@@ -1,21 +1,19 @@
 #ifndef CAN_HANDLER_H
-#define CAN_HANDER_H
+#define CAN_HANDLER_H
 
-#include "stm32f405xx.h"
 #include "stm32f4xx_hal.h"
-#include "cmsis_armcc.h"
+#include "cmsis_os.h"
 
-
-//struct pojedynczej ramki can
-typedef struct{
+// Surowa ramka CAN do kolejki
+typedef struct {
     uint32_t id;
-    uint8_t dlc;
-    uint8_t data[8];
-    uint32_t timestamp;
+    uint8_t  dlc;
+    uint8_t  data[8];
+    uint32_t timestamp;  // HAL_GetTick()
 } CAN_RawFrame;
 
-//ramka wysyłana do telemetrii
-typedef struct{
+// Zdekodowane dane telemetryczne
+typedef struct {
     uint16_t rpm;
     uint16_t speed;        // km/h * 10
     int16_t  temp_engine;  // °C
@@ -39,13 +37,10 @@ typedef enum {
     CMD_MODE_SNOW,
 } DriveCmd;
 
-//PONIŻEJ DO ZDEFINIOWANIA W can_handler.c
-
-//freeRTOS kolejki
+// Kolejki FreeRTOS (extern — definicje w can_handler.c)
 extern osMessageQueueId_t q_raw_frames;
 extern osMessageQueueId_t q_telemetry;
 extern osMessageQueueId_t q_tx_cmd;
-
 
 void can_filter_init_all(CAN_HandleTypeDef *hcan1, CAN_HandleTypeDef *hcan2);
 void can_send_drive_mode(CAN_HandleTypeDef *hcan, DriveCmd cmd);

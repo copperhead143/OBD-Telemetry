@@ -105,11 +105,11 @@ int main(void)
   MX_CAN2_Init();
   /* USER CODE BEGIN 2 */
 
-  Can_FilterTypeDef f = {0};
+  CAN_FilterTypeDef f = {0};
 
   f.FilterActivation      = CAN_FILTER_ENABLE;
   f.FilterBank            = 0;
-  f.FilterFIFOAssigment   = CAN_RX_FIFO0;
+  f.FilterFIFOAssignment  = CAN_RX_FIFO0;
   f.FilterMode            = CAN_FILTERMODE_IDMASK;
   f.FilterScale           = CAN_FILTERSCALE_32BIT;
   f.FilterIdHigh          = 0x0000;
@@ -139,7 +139,6 @@ int main(void)
   /* USER CODE END RTOS_TIMERS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
-  /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
