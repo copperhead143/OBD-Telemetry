@@ -51,11 +51,62 @@
 - Kolejny problem stanowiło zbudowanie warstwy hardware'owej. Ze względu na konieczność samodzielnego lutowania pinów do podzespołów część czasu musiała zostać poświęcona na testowanie poprawności fizycznego funckcjonowania systemu.
 - 
 
+## Zewnętrzny program
+Do wizualizacji i przejrzystej analizy odbieranych ramek CAN z magistrali, wykorzystaliśmy dedykowaną aplikację komputerową, którą stworzyłem w ramach mojej pracy inżynierskiej. Program ten w znacznym stopniu usprawnił pracę nad projektem, pozwalając na intuicyjne monitorowanie transmitowanych danych w czasie rzeczywistym i wychwytywanie wzorców dla konkretnych ID.
+
+![Proagram](GUI.png)
+
+## Schemat połączeń i Pinout
+
+
+### 1. Przetwornica Step-Down (LM2596) — Sekcja Zasilania
+
+Przetwornica obniża napięcie z instalacji samochodowej (zazwyczaj 12V–14.4V) do stabilnego napięcia 5V, które zasila transceiver CAN oraz stabilizator 3.3V mikrokontrolera.
+
+* **Wejście zasilania (IN):**
+* `OBD2 Pin 16 (BATTERY +)` -> `LM2596 IN+`
+* `OBD2 Pin 4 (CHASSIS GND)` -> `LM2596 IN-`
+* `OBD2 Pin 5 (SIGNAL GND)` -> `LM2596 IN-`
+
+
+* **Wyjście zasilania (OUT):**
+* `LM2596 OUT+ (+5V)` -> `TJA1051 VCC (Pin 3)` oraz wejście stabilizatora 3.3V dla STM32
+* `LM2596 OUT- (GND)` -> Wspólna masa układu (GND)
 
 
 
+### 2. Transceiver CAN (TJA1051T/3)
+
+Wersja `/3` tego układu posiada dedykowany pin `VIO`, który służy do dopasowania poziomów logicznych do standardu 3.3V. Pozwala to na bezpieczną, bezpośrednią współpracę z procesorami STM32 bez użycia dodatkowych konwerterów napięć.
+
+* **Strona magistrali (Samochód):**
+* `TJA1051 Pin 7 (CANH)` -> `OBD2 Pin 6 (CAN HIGH)`
+* `TJA1051 Pin 6 (CANL)` -> `OBD2 Pin 14 (CAN LOW)`
 
 
+* **Strona logiczna (Mikrokontroler STM32F405):**
+* `TJA1051 Pin 1 (TXD)` -> `STM32 PB9 (CAN1_TX)`
+* `TJA1051 Pin 4 (RXD)` -> `STM32 PB8 (CAN1_RX)`
+* `TJA1051 Pin 5 (VIO)` -> `STM32 +3.3V`
+* `TJA1051 Pin 3 (VCC)` -> `LM2596 OUT+ (+5V)`
+* `TJA1051 Pin 2 (GND)` -> Wspólna masa (GND)
+
+
+
+### 3. Interfejs USB CDC (STM32F405)
+
+Urządzenie wykorzystuje wbudowane peryferium USB_OTG_FS w trybie Device do komunikacji z komputerem.
+
+* `STM32 PA11 (USB_DM)` -> Złącze USB Data- (D-)
+* `STM32 PA12 (USB_DP)` -> Złącze USB Data+ (D+)
+* `Wspólna masa (GND)` -> Złącze USB GND
+* *(Opcjonalnie)* `Złącze USB VBUS (+5V)` można podpiąć przez diodę zabezpieczającą do sekcji zasilania, aby umożliwić diagnostykę i działanie układu "na biurku" po podpięciu do komputera, bez konieczności zasilania z portu OBD2.
+
+---
+
+### Schemat połączenia
+
+![Schemat połączeń CAN BUS i OBD2](can_bus_obd2_connection_diagram.svg)
 
 
 ## Działanie
