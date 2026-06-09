@@ -417,21 +417,11 @@ code {
 </li>
 <li><code>usb_parse_cmd()</code> parsuje komendy tekstowe w formacie <code>CMD:NAME</code>, obsługiwane predefiniowane: <code>CMD:NORMAL</code>, <code>CMD:SPORT</code>, <code>CMD:TRACK</code>, <code>CMD:DRIFT</code>, <code>CMD:SNOW</code>. Zwraca enum <code>DriveCmd</code> lub <code>CMD_NONE</code>.</li>
 </ul>
-<h2 id="nadawanie-polece%C5%84-tx--status">Nadawanie poleceń (TX) — status</h2>
-<ul>
-<li>W <code>can_handler.c</code> istnieje szkic funkcji <code>can_send_drive_mode()</code> oraz tablica <code>drive_mode_data[]</code>, ale są one zakomentowane i zawierają wartości placeholder. Aby wysyłać polecenia:
-<ol>
-<li>Uzupełnić rzeczywiste ID nadawcze (<code>StdId</code>) i payloady (z sniffingu oryginalnych ramek).</li>
-<li>Odkomentować/zweryfikować <code>can_send_drive_mode()</code> i ewentualnie dodać rate-limiting.</li>
-</ol>
-</li>
-</ul>
 <h2 id="napotkane-problemy-i-ich-rozwi%C4%85zania">Napotkane problemy i ich rozwiązania</h2>
 <ul>
 <li>Głównym problemem był brak dostępności dokumentacji zawierającej ID ramek CAN. Pula ramek, która jest standaryzowana pomiędzy wszystkimi producentami samochodów jest niewielka i zawiera głównie informacje potrzebne do funkcjonowanie systemów ADAS (Advanced Driver Assistance Systems), systemów bezpieczeństwa oraz uniwersalnej diagnostyki za pomocą OBDII.</li>
 <li>Aby sniffer mógł odczytać ramki z systemu Torque Vectoring'u, najpierw trzeba było wymusić jego aktywność. W tym celu należy w dynamiczny sposób prowadzić na krętej drodze. Ze względu na obowiązujące przepisy ruchu drogowego, udaliśmy się na zamknięty obiekt, gdzie można było wymusić działanie systemu. Pomimo wszelkich starań okno działania jest względnie niewielkie, co znacznie utrudniło dostosowanie filtrów oraz zmniejszyło ilość dostępnych danych.</li>
 <li>Kolejny problem stanowiło zbudowanie warstwy hardware'owej. Ze względu na konieczność samodzielnego lutowania pinów do podzespołów część czasu musiała zostać poświęcona na testowanie poprawności fizycznego funckcjonowania systemu.</li>
-<li></li>
 </ul>
 <h2 id="zewn%C4%99trzny-program">Zewnętrzny program</h2>
 <p>Do wizualizacji i przejrzystej analizy odbieranych ramek CAN z magistrali, wykorzystaliśmy dedykowaną aplikację komputerową, którą stworzyłem w ramach mojej pracy inżynierskiej. Program ten w znacznym stopniu usprawnił pracę nad projektem, pozwalając na intuicyjne monitorowanie transmitowanych danych w czasie rzeczywistym i wychwytywanie wzorców dla konkretnych ID.</p>

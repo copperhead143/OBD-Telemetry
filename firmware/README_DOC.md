@@ -39,17 +39,11 @@
   - `ts` (timestamp), `rpm`, `spd` (km/h), `boost`, `tps`, `t_eng`, `t_oil`, `tv_rl`, `tv_rr`, `spd_fl`, `spd_fr`, `spd_rl`, `spd_rr`, `mode`.
 - `usb_parse_cmd()` parsuje komendy tekstowe w formacie `CMD:NAME`, obsługiwane predefiniowane: `CMD:NORMAL`, `CMD:SPORT`, `CMD:TRACK`, `CMD:DRIFT`, `CMD:SNOW`. Zwraca enum `DriveCmd` lub `CMD_NONE`.
 
-## Nadawanie poleceń (TX) — status
-- W `can_handler.c` istnieje szkic funkcji `can_send_drive_mode()` oraz tablica `drive_mode_data[]`, ale są one zakomentowane i zawierają wartości placeholder. Aby wysyłać polecenia:
-  1. Uzupełnić rzeczywiste ID nadawcze (`StdId`) i payloady (z sniffingu oryginalnych ramek).
-  2. Odkomentować/zweryfikować `can_send_drive_mode()` i ewentualnie dodać rate-limiting.
-
 
 ## Napotkane problemy i ich rozwiązania
 - Głównym problemem był brak dostępności dokumentacji zawierającej ID ramek CAN. Pula ramek, która jest standaryzowana pomiędzy wszystkimi producentami samochodów jest niewielka i zawiera głównie informacje potrzebne do funkcjonowanie systemów ADAS (Advanced Driver Assistance Systems), systemów bezpieczeństwa oraz uniwersalnej diagnostyki za pomocą OBDII.
 - Aby sniffer mógł odczytać ramki z systemu Torque Vectoring'u, najpierw trzeba było wymusić jego aktywność. W tym celu należy w dynamiczny sposób prowadzić na krętej drodze. Ze względu na obowiązujące przepisy ruchu drogowego, udaliśmy się na zamknięty obiekt, gdzie można było wymusić działanie systemu. Pomimo wszelkich starań okno działania jest względnie niewielkie, co znacznie utrudniło dostosowanie filtrów oraz zmniejszyło ilość dostępnych danych.
 - Kolejny problem stanowiło zbudowanie warstwy hardware'owej. Ze względu na konieczność samodzielnego lutowania pinów do podzespołów część czasu musiała zostać poświęcona na testowanie poprawności fizycznego funckcjonowania systemu.
-- 
 
 ## Zewnętrzny program
 Do wizualizacji i przejrzystej analizy odbieranych ramek CAN z magistrali, wykorzystaliśmy dedykowaną aplikację komputerową, którą stworzyłem w ramach mojej pracy inżynierskiej. Program ten w znacznym stopniu usprawnił pracę nad projektem, pozwalając na intuicyjne monitorowanie transmitowanych danych w czasie rzeczywistym i wychwytywanie wzorców dla konkretnych ID.
