@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README_DOC.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="dokumentacja-projektu--obd-telemetry">Dokumentacja projektu — OBD-Telemetry</h1>
+<h2 id="cel">Cel</h2>
+<ul>
+<li>Krótkie narzędzie telemetryczne dla pojazdu OBD: sniffowanie ramek CAN, dekodowanie parametrów (RPM, prędkości kół, TPS, temperatury, boost itp.) i wysyłka w formacie JSON przez USB CDC oraz opcjonalne wysyłanie poleceń trybu jazdy.</li>
+</ul>
+<h2 id="kluczowe-pliki">Kluczowe pliki</h2>
+<ul>
+<li><code>firmware/Core/Src/can_handler.c</code> — konfiguracja filtrów CAN, ISR RX, dekoder ramek, (szablon) funkcja nadawcza trybu jazdy.</li>
+<li><code>firmware/Core/Inc/can_handler.h</code> — definicje struktur danych: <code>CAN_RawFrame</code>, <code>TelemetryFrame</code>, enum <code>DriveCmd</code> i deklaracje kolejek.</li>
+<li><code>firmware/Core/Src/usb_handler.c</code> — serializacja <code>TelemetryFrame</code> do JSON i funkcja parsująca komendy przychodzące przez CDC.</li>
+<li><code>firmware/Core/Inc/usb_handler.h</code> — prototypy <code>usb_send_telemetry()</code> i <code>usb_parse_cmd()</code>.</li>
+<li><code>firmware/Core/Src/freertos.c</code> — tworzenie kolejek FreeRTOS oraz implementacja zadań: <code>Task_CAN_Decode</code>, <code>Task_USB_TX</code>, <code>Task_Drive_TX</code>.</li>
+<li><code>firmware/Core/Src/main.c</code> — inicjalizacja peryferiów (CAN1/CAN2, GPIO, USB), start RTOS i <code>defaultTask</code> (uruchamia USB device).</li>
+<li><code>firmware/obd-telemetry.ioc</code> — konfiguracja CubeMX (można otworzyć w STM32CubeIDE aby wygenerować/zmodyfikować projekt).</li>
+<li><code>firmware/EWARM/</code> — projekt Keil MDK-ARM (pliki projektu do budowy dla Keil).</li>
+</ul>
+<h2 id="architektura-runtime">Architektura runtime</h2>
+<ul>
+<li>ISR CAN (HAL callback <code>HAL_CAN_RxFifo0MsgPendingCallback</code>) odczytuje ramkę i wrzuca <code>CAN_RawFrame</code> do kolejki <code>q_raw_frames</code>.</li>
+<li><code>Task_CAN_Decode</code> pobiera surowe ramki, wywołuje dekoder (<code>can_decode_and_update</code>) i publikuje aktualny <code>TelemetryFrame</code> do <code>q_telemetry</code> (zastępując poprzedni wpis).</li>
+<li><code>Task_USB_TX</code> odczytuje <code>q_telemetry</code> i co ~20 ms wysyła JSON przez USB CDC (<code>usb_send_telemetry</code>).</li>
+<li><code>Task_Drive_TX</code> czeka na komendy w <code>q_tx_cmd</code> i przekazuje je do funkcji nadawczej CAN (<code>can_send_drive_mode</code>) — obecnie jest to szablon/zakomentowane (wymaga uzupełnienia ID i payload).</li>
+</ul>
+<h2 id="struktury-i-kolejki">Struktury i kolejki</h2>
+<ul>
+<li><code>CAN_RawFrame</code> (w <code>can_handler.h</code>): { <code>id</code>, <code>dlc</code>, <code>data[8]</code>, <code>timestamp</code> } — surowa ramka odbierana z ISR.</li>
+<li><code>TelemetryFrame</code>: zawiera pola: <code>rpm</code>, <code>speed</code> (km/h*10), <code>temp_engine</code>, <code>temp_oil</code>, <code>boost_kpa</code>, <code>throttle</code>, <code>tv_rear_left/right</code>, <code>drive_mode</code>, <code>wheel_spd[4]</code>, <code>timestamp</code>.</li>
+<li>Kolejki (wg <code>freertos.c</code>): <code>q_raw_frames</code> (32 elementy), <code>q_telemetry</code> (8 elementów), <code>q_tx_cmd</code> (4 elementy).</li>
+</ul>
+<h2 id="dekodowanie-can-co-robi-kod">Dekodowanie CAN (co robi kod)</h2>
+<ul>
+<li>Filtry: <code>can_filter_init_all()</code> ustawia CAN1 w trybie &quot;sniff&quot; (przepuszcza wszystkie ramki), CAN2 jako slave (banki filtrów zależne od układu F405).</li>
+<li>ISR <code>HAL_CAN_RxFifo0MsgPendingCallback</code>: pobiera nagłówek i bajty ramki, buduje <code>CAN_RawFrame</code> i wrzuca do <code>q_raw_frames</code> (wersja FromISR).</li>
+<li><code>decode_frame()</code> rozpoznaje kilka stałych ID i ekstraktuje wartości:
+<ul>
+<li><code>CAN_ID_WHEEL_SPEED</code> (0x190): bajty 0-1 FL, 2-3 FR, 4-5 RL, 6-7 RR; zapisane jako 16-bit, <code>speed</code> = średnia czterech kół.</li>
+<li><code>CAN_ID_THROTTLE</code> (0x213): throttle = data[0] * 100/255.</li>
+<li><code>CAN_ID_TEMP</code> (0x420): <code>temp_engine</code> = data[0] - 40.</li>
+<li>OBD-II response <code>0x7E8</code>: obsługa service 0x41 (response dla service 01) — parsuje PIDy: 0x0C (RPM), 0x0D (vehicle speed), 0x0B (boost/MAP), 0x5C (oil temp).</li>
+</ul>
+</li>
+<li>Nieznane ID są ignorowane przez dekoder (zapisywane jako raw do sniffingu — można wysyłać je przez USB w celu analizy).</li>
+</ul>
+<h2 id="usb--protok%C3%B3%C5%82-szeregowy">USB / protokół szeregowy</h2>
+<ul>
+<li><code>usb_send_telemetry()</code> serializuje <code>TelemetryFrame</code> do pojedynczego JSON-owego obiektu zakończonego CRLF. Przykład pól:
+<ul>
+<li><code>ts</code> (timestamp), <code>rpm</code>, <code>spd</code> (km/h), <code>boost</code>, <code>tps</code>, <code>t_eng</code>, <code>t_oil</code>, <code>tv_rl</code>, <code>tv_rr</code>, <code>spd_fl</code>, <code>spd_fr</code>, <code>spd_rl</code>, <code>spd_rr</code>, <code>mode</code>.</li>
+</ul>
+</li>
+<li><code>usb_parse_cmd()</code> parsuje komendy tekstowe w formacie <code>CMD:NAME</code>, obsługiwane predefiniowane: <code>CMD:NORMAL</code>, <code>CMD:SPORT</code>, <code>CMD:TRACK</code>, <code>CMD:DRIFT</code>, <code>CMD:SNOW</code>. Zwraca enum <code>DriveCmd</code> lub <code>CMD_NONE</code>.</li>
+</ul>
+<h2 id="nadawanie-polece%C5%84-tx--status">Nadawanie poleceń (TX) — status</h2>
+<ul>
+<li>W <code>can_handler.c</code> istnieje szkic funkcji <code>can_send_drive_mode()</code> oraz tablica <code>drive_mode_data[]</code>, ale są one zakomentowane i zawierają wartości placeholder. Aby wysyłać polecenia:
+<ol>
+<li>Uzupełnić rzeczywiste ID nadawcze (<code>StdId</code>) i payloady (z sniffingu oryginalnych ramek).</li>
+<li>Odkomentować/zweryfikować <code>can_send_drive_mode()</code> i ewentualnie dodać rate-limiting.</li>
+</ol>
+</li>
+</ul>
+<h2 id="napotkane-problemy-i-ich-rozwi%C4%85zania">Napotkane problemy i ich rozwiązania</h2>
+<ul>
+<li>Głównym problemem był brak dostępności dokumentacji zawierającej ID ramek CAN. Pula ramek, która jest standaryzowana pomiędzy wszystkimi producentami samochodów jest niewielka i zawiera głównie informacje potrzebne do funkcjonowanie systemów ADAS (Advanced Driver Assistance Systems), systemów bezpieczeństwa oraz uniwersalnej diagnostyki za pomocą OBDII.</li>
+<li>Aby sniffer mógł odczytać ramki z systemu Torque Vectoring'u, najpierw trzeba było wymusić jego aktywność. W tym celu należy w dynamiczny sposób prowadzić na krętej drodze. Ze względu na obowiązujące przepisy ruchu drogowego, udaliśmy się na zamknięty obiekt, gdzie można było wymusić działanie systemu. Pomimo wszelkich starań okno działania jest względnie niewielkie, co znacznie utrudniło dostosowanie filtrów oraz zmniejszyło ilość dostępnych danych.</li>
+<li>Kolejny problem stanowiło zbudowanie warstwy hardware'owej. Ze względu na konieczność samodzielnego lutowania pinów do podzespołów część czasu musiała zostać poświęcona na testowanie poprawności fizycznego funckcjonowania systemu.</li>
+<li></li>
+</ul>
+<h2 id="zewn%C4%99trzny-program">Zewnętrzny program</h2>
+<p>Do wizualizacji i przejrzystej analizy odbieranych ramek CAN z magistrali, wykorzystaliśmy dedykowaną aplikację komputerową, którą stworzyłem w ramach mojej pracy inżynierskiej. Program ten w znacznym stopniu usprawnił pracę nad projektem, pozwalając na intuicyjne monitorowanie transmitowanych danych w czasie rzeczywistym i wychwytywanie wzorców dla konkretnych ID.</p>
+<p><img src="GUI.png" alt="Proagram"></p>
+<h2 id="schemat-po%C5%82%C4%85cze%C5%84-i-pinout">Schemat połączeń i Pinout</h2>
+<h3 id="1-przetwornica-step-down-lm2596--sekcja-zasilania">1. Przetwornica Step-Down (LM2596) — Sekcja Zasilania</h3>
+<p>Przetwornica obniża napięcie z instalacji samochodowej (zazwyczaj 12V–14.4V) do stabilnego napięcia 5V, które zasila transceiver CAN oraz stabilizator 3.3V mikrokontrolera.</p>
+<ul>
+<li>
+<p><strong>Wejście zasilania (IN):</strong></p>
+</li>
+<li>
+<p><code>OBD2 Pin 16 (BATTERY +)</code> -&gt; <code>LM2596 IN+</code></p>
+</li>
+<li>
+<p><code>OBD2 Pin 4 (CHASSIS GND)</code> -&gt; <code>LM2596 IN-</code></p>
+</li>
+<li>
+<p><code>OBD2 Pin 5 (SIGNAL GND)</code> -&gt; <code>LM2596 IN-</code></p>
+</li>
+<li>
+<p><strong>Wyjście zasilania (OUT):</strong></p>
+</li>
+<li>
+<p><code>LM2596 OUT+ (+5V)</code> -&gt; <code>TJA1051 VCC (Pin 3)</code> oraz wejście stabilizatora 3.3V dla STM32</p>
+</li>
+<li>
+<p><code>LM2596 OUT- (GND)</code> -&gt; Wspólna masa układu (GND)</p>
+</li>
+</ul>
+<h3 id="2-transceiver-can-tja1051t3">2. Transceiver CAN (TJA1051T/3)</h3>
+<p>Wersja <code>/3</code> tego układu posiada dedykowany pin <code>VIO</code>, który służy do dopasowania poziomów logicznych do standardu 3.3V. Pozwala to na bezpieczną, bezpośrednią współpracę z procesorami STM32 bez użycia dodatkowych konwerterów napięć.</p>
+<ul>
+<li>
+<p><strong>Strona magistrali (Samochód):</strong></p>
+</li>
+<li>
+<p><code>TJA1051 Pin 7 (CANH)</code> -&gt; <code>OBD2 Pin 6 (CAN HIGH)</code></p>
+</li>
+<li>
+<p><code>TJA1051 Pin 6 (CANL)</code> -&gt; <code>OBD2 Pin 14 (CAN LOW)</code></p>
+</li>
+<li>
+<p><strong>Strona logiczna (Mikrokontroler STM32F405):</strong></p>
+</li>
+<li>
+<p><code>TJA1051 Pin 1 (TXD)</code> -&gt; <code>STM32 PB9 (CAN1_TX)</code></p>
+</li>
+<li>
+<p><code>TJA1051 Pin 4 (RXD)</code> -&gt; <code>STM32 PB8 (CAN1_RX)</code></p>
+</li>
+<li>
+<p><code>TJA1051 Pin 5 (VIO)</code> -&gt; <code>STM32 +3.3V</code></p>
+</li>
+<li>
+<p><code>TJA1051 Pin 3 (VCC)</code> -&gt; <code>LM2596 OUT+ (+5V)</code></p>
+</li>
+<li>
+<p><code>TJA1051 Pin 2 (GND)</code> -&gt; Wspólna masa (GND)</p>
+</li>
+</ul>
+<h3 id="3-interfejs-usb-cdc-stm32f405">3. Interfejs USB CDC (STM32F405)</h3>
+<p>Urządzenie wykorzystuje wbudowane peryferium USB_OTG_FS w trybie Device do komunikacji z komputerem.</p>
+<ul>
+<li><code>STM32 PA11 (USB_DM)</code> -&gt; Złącze USB Data- (D-)</li>
+<li><code>STM32 PA12 (USB_DP)</code> -&gt; Złącze USB Data+ (D+)</li>
+<li><code>Wspólna masa (GND)</code> -&gt; Złącze USB GND</li>
+<li><em>(Opcjonalnie)</em> <code>Złącze USB VBUS (+5V)</code> można podpiąć przez diodę zabezpieczającą do sekcji zasilania, aby umożliwić diagnostykę i działanie układu &quot;na biurku&quot; po podpięciu do komputera, bez konieczności zasilania z portu OBD2.</li>
+</ul>
+<hr>
+<h3 id="schemat-po%C5%82%C4%85czenia">Schemat połączenia</h3>
+<p><img src="can_bus_obd2_schemat_v2.svg" alt="Schemat połączeń CAN BUS i OBD2"></p>
+<h2 id="dzia%C5%82anie">Działanie</h2>
+<ul>
+<li>Ramki, które były użyteczne do projektu, musiały zostać odkryte oraz rozpracowane za pomocą sniffingu. Udało się określić następujące ID dla samochodu Ford Focus MK3 RS:
+<ul>
+<li>ID: 0x070 =&gt; obliczony moment obrotowy przekazywany do skrzynii biegów,</li>
+<li>ID: 0x080 =&gt; Throttle Position Sensor, połozenie pedału przepustnicy, 9000=0%, 98e3=&gt;100%, skala liniowa</li>
+<li>ID: 0x090 =&gt; RPM, obroty silnika na minutę,</li>
+<li>ID: 0x420 =&gt; Tryby jazdy, działanie sprzężenia aktywnego napędu na 4 koła firmy GKN</li>
+<li>ID: 0x190 =&gt; Prędkości obrotowe poszczególnych kół,</li>
+<li>ID: 0x1B0 =&gt; Maksymalny moment obrotowy przekazywany do systemu Torque Vectoringu, aby odczytać wartość w NM należy od wartości przekazywanej w ramce odjąć 1250,</li>
+<li>ID: 0x2C0 =&gt; Moment obrotowy przekazywany do kół z prawej strony, wartość przekazywana w ramce jest bezpośrednią wartością momentu obrotowego</li>
+<li>ID: 0x2D0 =&gt; Moment obrotowy przekazywany do kół z lewej strony, wartość przekazywana w ramce jest bezpośrednią wartością momentu obrotowego
+Nie są to wszystkie ramki odkryte podczas sniffingu, są jednak najbardziej istotne dla działania projektu.</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+</body>
+</html>
