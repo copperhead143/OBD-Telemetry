@@ -45,9 +45,28 @@
   2. Odkomentować/zweryfikować `can_send_drive_mode()` i ewentualnie dodać rate-limiting.
 
 
-## Budowa i wgrywanie
-- Projekt Keil: otwórz `firmware/EWARM/obd-telemetry.ewp` (lub WorkSpace `Project.eww`) w Keil MDK-ARM i skompiluj.
-- Alternatywnie otwórz `firmware/obd-telemetry.ioc` w STM32CubeIDE (CubeMX) aby wygenerować projekt dla STM32CubeIDE i skompilować/wgrać przez ST-Link.
-- Do wgrywania użyj ST-Linka (np. z poziomu Keil/STM32CubeIDE) lub innego programatora kompatybilnego z STM32F4.
+## Napotkane problemy i ich rozwiązania
+- Głównym problemem był brak dostępności dokumentacji zawierającej ID ramek CAN. Pula ramek, która jest standaryzowana pomiędzy wszystkimi producentami samochodów jest niewielka i zawiera głównie informacje potrzebne do funkcjonowanie systemów ADAS (Advanced Driver Assistance Systems), systemów bezpieczeństwa oraz uniwersalnej diagnostyki za pomocą OBDII.
+- Aby sniffer mógł odczytać ramki z systemu Torque Vectoring'u, najpierw trzeba było wymusić jego aktywność. W tym celu należy w dynamiczny sposób prowadzić na krętej drodze. Ze względu na obowiązujące przepisy ruchu drogowego, udaliśmy się na zamknięty obiekt, gdzie można było wymusić działanie systemu. Pomimo wszelkich starań okno działania jest względnie niewielkie, co znacznie utrudniło dostosowanie filtrów oraz zmniejszyło ilość dostępnych danych.
+- Kolejny problem stanowiło zbudowanie warstwy hardware'owej. Ze względu na konieczność samodzielnego lutowania pinów do podzespołów część czasu musiała zostać poświęcona na testowanie poprawności fizycznego funckcjonowania systemu.
+- 
 
+
+
+
+
+
+
+
+## Działanie
+- Ramki, które były użyteczne do projektu, musiały zostać odkryte oraz rozpracowane za pomocą sniffingu. Udało się określić następujące ID dla samochodu Ford Focus MK3 RS:
+  - ID: 0x070 => obliczony moment obrotowy przekazywany do skrzynii biegów,
+  - ID: 0x080 => Throttle Position Sensor, połozenie pedału przepustnicy, 9000=0%, 98e3=>100%, skala liniowa
+  - ID: 0x090 => RPM, obroty silnika na minutę,
+  - ID: 0x420 => Tryby jazdy, działanie sprzężenia aktywnego napędu na 4 koła firmy GKN
+  - ID: 0x190 => Prędkości obrotowe poszczególnych kół,
+  - ID: 0x1B0 => Maksymalny moment obrotowy przekazywany do systemu Torque Vectoringu, aby odczytać wartość w NM należy od wartości przekazywanej w ramce odjąć 1250,
+  - ID: 0x2C0 => Moment obrotowy przekazywany do kół z prawej strony, wartość przekazywana w ramce jest bezpośrednią wartością momentu obrotowego
+  - ID: 0x2D0 => Moment obrotowy przekazywany do kół z lewej strony, wartość przekazywana w ramce jest bezpośrednią wartością momentu obrotowego
+Nie są to wszystkie ramki odkryte podczas sniffingu, są jednak najbardziej istotne dla działania projektu.
 ---

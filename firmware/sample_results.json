@@ -1,0 +1,48 @@
+{
+  "protocol_version": "1.0",
+  "device_id": "OBD-STM32-01",
+  "timestamp": "2026-05-15T12:34:56Z",
+  "vehicle": {
+    "vin": "redacted",
+    "odometer_km": 70456.7,
+    "speed_kmh": 188,
+    "rpm": 5200,
+    "throttle_pos_pct": 89.2,
+    "engine_load_pct": 91.5,
+    "coolant_temp_c": 97,
+    "intake_air_temp_c": 34,
+    "fuel_level_pct": 52.3,
+    "battery_voltage_v": 12.6,
+    "dtc_count": 1,
+    "dtc_codes": [
+      "P0420"
+    ]
+  },
+  "fuel": {
+    "instant_l_per_h": 99.9,
+    "avg_l_per_100km": 17.8
+  },
+  "gps": {
+    "lat": 50.06143,
+    "lon": 19.93658,
+    "alt_m": 220.5,
+    "speed_kmh": 187.5
+  },
+  "can_bus": {
+    "messages": [
+      {
+        "id": "0x0C9",
+        "timestamp_ms": 165478,
+        "data": "0A1B2C3D"
+      },
+      {
+        "id": "0x0A8",
+        "timestamp_ms": 165479,
+        "data": "FF00AA55"
+      }
+    ]
+  },
+  "raw": {
+    "hex": "7E8FF00A1B2C..."
+  }
+}
