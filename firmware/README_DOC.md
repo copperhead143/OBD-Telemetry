@@ -106,7 +106,7 @@ Urządzenie wykorzystuje wbudowane peryferium USB_OTG_FS w trybie Device do komu
 
 ### Schemat połączenia
 
-![Schemat połączeń CAN BUS i OBD2](can_bus_obd2_connection_diagram.svg)
+![Schemat połączeń CAN BUS i OBD2](can_bus_obd2_schemat_v2.svg)
 
 
 ## Działanie
